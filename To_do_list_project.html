@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<title>first project</title>
+	</head>
+	<body>
+		<h1>TO-DO LIST</h1>
+		<p>Welcome! Remember, <i><b>a stitch in time saves nine.</b></i></p>
+		<p>Kindly input the tasks you want to be added to your list and click the <b>Enter</b> button.</p>
+		<p>Click the task to mark it as "completed".</p>
+		<p>Click on the <strong>remove</strong> button to delete tasks.</p>
+
+		<input id="userTask" type='text' placeholder="New task" maxlength='25'>
+		<button id="enter">Enter</button>
+		<ul></ul>
+
+		<script type="text/javascript">
+			var button = document.getElementById('enter');
+var input = document.getElementById("userTask");
+var ul = document.querySelector('ul');
+var task = document.getElementsByTagName('li');
+
+function inputLength() {
+	return input.value.length;
+}
+function listLength() {
+	return task.length;
+}
+function createTask() {
+	// body...
+	var li=document.createElement('li');
+	li.appendChild(document.createTextNode(input.value));
+	ul.appendChild(li);
+	input.value = "";
+	function done() {
+		li.insertBefore(document.createTextNode('-completed'), dBtn);
+	}
+	li.addEventListener('click', done);
+	var dBtn = document.createElement('button');
+	dBtn.appendChild(document.createTextNode('remove'));
+	li.appendChild(dBtn);
+	dBtn.addEventListener('click', deleteTask);
+
+	function deleteTask() {
+		ul.removeChild(li);
+	}
+}
+function addTask() {
+	// body...
+	if (inputLength() > 0) {createTask();
+	}
+}
+function addTaskAfterEnterPress(event) {
+	// body...
+	if (inputLength() > 0 && event.which === 13) {
+		createTask();
+	}
+}
+button.addEventListener('click', addTask);
+input.addEventListener('keypress', addTaskAfterEnterPress);
+		</script>
+
+	</body>
+</html>
